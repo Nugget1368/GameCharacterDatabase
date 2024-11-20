@@ -4,3 +4,41 @@ GET {{GameCharacterDatabase_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{GameCharacterDatabase_HostAddress}}/api/character
+Accept: application/json
+
+###
+
+POST {{GameCharacterDatabase_HostAddress}}/api/character
+Content-Type: application/json
+
+{
+    "name": "Mario",
+  "inventory": {
+    "description": "Mario's Inventory",
+    "items": [
+      {
+        "name": "Mushroom"
+      },
+            {
+        "name": "Fire Flower"
+      }
+    ]
+  },
+  "weapons": [
+    {
+      "name": "Fireball"
+    },
+        {
+      "name": "Power Stomp"
+    }
+  ],
+  "factions": [
+    {
+      "name": "Mushroom Kingdom"
+    }
+  ]
+}
+
+###

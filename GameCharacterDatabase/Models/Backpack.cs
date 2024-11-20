@@ -2,7 +2,7 @@
 
 namespace GameCharacterDatabase.Models
 {
-	public class Backpack
+	public class Inventory
 	{
 		public int Id { get; set; }
 		public string Description { get; set; }

@@ -21,7 +21,7 @@ namespace GameCharacterDatabase.Controllers
 		public async Task<ActionResult<List<Character>>> GetCharacters()
 		{
 			var Characters = await context.Characters
-				.Include(c => c.Backpack)
+				.Include(c => c.Inventory)
 				.Include(c => c.Weapons)
 				.Include(c => c.Factions)
 				.ToListAsync();
@@ -36,21 +36,21 @@ namespace GameCharacterDatabase.Controllers
 			{
 				Name = request.Name
 			};
-			var backPack = new Backpack
+			var inventory = new Inventory
 			{
-				Description = request.BackPack.description,
+				Description = request.Inventory.description,
 				Character = newCharacter
 			};
 			var weapons = request.Weapons.Select(weapon => new Weapon { Name = weapon.Name, Character = newCharacter }).ToList();
 			var factions = request.Factions.Select(faction => new Faction { Name = faction.Name, Characters = new List<Character> { newCharacter } }).ToList();
 
-			newCharacter.Backpack = backPack;
+			newCharacter.Inventory = inventory;
 			newCharacter.Weapons = weapons;
 			newCharacter.Factions = factions;
 
 			context.Characters.Add(newCharacter);
 			await context.SaveChangesAsync();
-			return Ok(await context.Characters.Include(c => c.Backpack).Include(c => c.Weapons).Include(c => c.Factions).ToListAsync());
+			return Ok(await context.Characters.Include(c => c.Inventory).Include(c => c.Weapons).Include(c => c.Factions).ToListAsync());
 		}
 	}
 }

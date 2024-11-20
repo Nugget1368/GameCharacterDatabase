@@ -1,4 +1,4 @@
 ﻿namespace GameCharacterDatabase.DTOs
 {
-	public record struct BackpackCreateDTO(string description);
+	public record struct InventoryCreateDTO(string description);
 }

@@ -39,14 +39,16 @@ namespace GameCharacterDatabase.Controllers
 			var inventory = new Inventory
 			{
 				Description = request.Inventory.description,
-				Character = newCharacter
+				Character = newCharacter				
 			};
+			var items = request.Inventory.Items.Select(item => new Item { Name = item.Name }).ToList();
 			var weapons = request.Weapons.Select(weapon => new Weapon { Name = weapon.Name, Character = newCharacter }).ToList();
 			var factions = request.Factions.Select(faction => new Faction { Name = faction.Name, Characters = new List<Character> { newCharacter } }).ToList();
 
 			newCharacter.Inventory = inventory;
 			newCharacter.Weapons = weapons;
 			newCharacter.Factions = factions;
+			newCharacter.Inventory.Items = items;
 
 			context.Characters.Add(newCharacter);
 			await context.SaveChangesAsync();
